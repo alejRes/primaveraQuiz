@@ -123,10 +123,6 @@ const printQuestion = (q) => {
  * 
  */
 
-/*
-!- If an eventListener is added on home.html "Take Quiz button". The product of the function call stays on home. Since the only way to access question.html is via this button the functions to produce the questions are called on page load.
- */
-
 const questionOnLoad = () => {
     getQuestions().then(quest => quest.results.forEach(element => printQuestions(element))).then(()=>printQuestion(questions))
 }
