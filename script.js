@@ -21,7 +21,7 @@ let questions = [{
     correct: 'Un canario'
 },
 {
-    name: 'Dibujos',
+    name: 'Literatura',
     label: '¿Qué animal es piolin?',
     answers: [
         { label: 'Un canario' , value: 'Un canario'},
@@ -142,6 +142,9 @@ const changeCheck =(ansTrue, i,e,container)=>{
         i++
         container.innerHTML=""
         printQuestion(questions,i)
+    }
+    if (true) {
+        
     }
 
 }
