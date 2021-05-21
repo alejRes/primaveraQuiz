@@ -19,6 +19,61 @@ let questions = [{
         { label: 'Un elefante', value: 'Un elefante'  },
     ],
     correct: 'Un canario'
+},
+{
+    name: 'Dibujos',
+    label: '¿Qué animal es piolin?',
+    answers: [
+        { label: 'Un canario' , value: 'Un canario'},
+        { label: 'Un gato', value: 'Un gato'  },
+        { label: 'Un perro', value: 'Un perro'  },
+        { label: 'Un elefante', value: 'Un elefante'  },
+    ],
+    correct: 'Un canario'
+},
+{
+    name: 'Dibujos',
+    label: '¿Qué animal es piolin?',
+    answers: [
+        { label: 'Un canario' , value: 'Un canario'},
+        { label: 'Un gato', value: 'Un gato'  },
+        { label: 'Un perro', value: 'Un perro'  },
+        { label: 'Un elefante', value: 'Un elefante'  },
+    ],
+    correct: 'Un canario'
+},
+{
+    name: 'Dibujos',
+    label: '¿Qué animal es piolin?',
+    answers: [
+        { label: 'Un canario' , value: 'Un canario'},
+        { label: 'Un gato', value: 'Un gato'  },
+        { label: 'Un perro', value: 'Un perro'  },
+        { label: 'Un elefante', value: 'Un elefante'  },
+    ],
+    correct: 'Un canario'
+},
+{
+    name: 'Dibujos',
+    label: '¿Qué animal es piolin?',
+    answers: [
+        { label: 'Un canario' , value: 'Un canario'},
+        { label: 'Un gato', value: 'Un gato'  },
+        { label: 'Un perro', value: 'Un perro'  },
+        { label: 'Un elefante', value: 'Un elefante'  },
+    ],
+    correct: 'Un canario'
+},
+{
+    name: 'Dibujos',
+    label: '¿Qué animal es piolin?',
+    answers: [
+        { label: 'Un canario' , value: 'Un canario'},
+        { label: 'Un gato', value: 'Un gato'  },
+        { label: 'Un perro', value: 'Un perro'  },
+        { label: 'Un elefante', value: 'Un elefante'  },
+    ],
+    correct: 'Un canario'
 }]
 
 // function that messes up the awnser
@@ -37,7 +92,7 @@ const unordenedList = (arrayOrdened) => {
 const printQuestion = (questions, index) => {
     console.log(questions[index].answers)
     let respuetas = unordenedList(questions[index].answers) //save a messy array
-    console.log(respuetas)
+    
     let container = document.getElementById('divQuest');
     let quest = document.createElement("h2")
     let txtquest = document.createTextNode(questions[index].label)
@@ -58,28 +113,52 @@ const printQuestion = (questions, index) => {
     let btn = document.createElement('button')
     btn.innerText="Siguiente"
     btn.setAttribute("id","btnNext")
-  /*   btn.addEventListener('click', () => {
-        container.innerHTML=""
-        document.getElementsByName('awnser').forEach(element => {
-            if (element.checked) console.log(element.value)
-            
+    btn.addEventListener('click', (event) => {
+        
+        /* document.getElementsByName('awnser').forEach(element => {
+            if (element.checked) {
+                console.log(element.value)
+                console.log(event.target.innerText)
+            }
         });
-        checkAwnser(questions[index].correct)
-    }) */
+        if(index!=(questions.length-1)){
+            index++
+            container.innerHTML=""
+            printQuestion(questions,index)
+        } */
+        changeCheck(questions[index].correct,index,event,container)
+    })
     container.appendChild(btn)
+}
+// function that change and check the targets
+const changeCheck =(ansTrue, i,e,container)=>{
+    document.getElementsByName('awnser').forEach(element => {
+        if (element.checked) {
+            console.log(element.value)
+            console.log(e.target.innerText)
+        }
+    });
+    if(i!=(questions.length-1)){
+        i++
+        container.innerHTML=""
+        printQuestion(questions,i)
+    }
+
 }
 
 printQuestion(questions,0)
 
-document.getElementById('btnNext').addEventListener('click', (event) => {
+/* document.getElementById('btnNext').addEventListener('click', (event) => {
     let hoy = new Date()
-    let fecha = `${hoy.getDate()}-${(hoy.getMonth() + 1)}-${hoy.getFullYear()}`
+    let fecha = `${hoy.getDate()}-${(hoy.getMonth() + 1)}-${hoy.getFullYear()} ${event.timeStamp}`
+
+    console.log(fecha)
     // result(fecha,puntuacion);
     document.getElementsByName('awnser').forEach(element => {
         if (element.checked) console.log(element.value)
         
     });
-})
+}) */
 
 // function that messes up the awnser
 /* const unordenedList = (arrayOrdened) => {
@@ -93,4 +172,3 @@ document.getElementById('btnNext').addEventListener('click', (event) => {
     }
 } */
 
-printQuestion(questions,0)
