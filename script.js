@@ -4,6 +4,8 @@
  * 
  */
 
+const questions = [];
+
 const quest = {
     "results":[
                 {
@@ -93,12 +95,14 @@ const printQuestions = (quests) => {
                             {label: quests.incorrect_answers[0], value: quests.incorrect_answers[0]},
                             {label: quests.incorrect_answers[1], value: quests.incorrect_answers[1]},
                             {label: quests.incorrect_answers[2], value: quests.incorrect_answers[2]},
-                            {label: 'Ninguna', value: 'Ninguna'},
+                            {label: quests.correct_answer, value: quests.correct_answer},
                         ],
                         correct: quests.correct_answer
                     }
-    printQuestion(question);
+    questions.push(question);
 }
+
+
 
 /**
  * 
@@ -107,7 +111,10 @@ const printQuestions = (quests) => {
  */
 
 const printQuestion = (q) => {
+
     console.log(q);
+    return q
+
 }
 
 /**
@@ -121,7 +128,7 @@ const printQuestion = (q) => {
  */
 
 const questionOnLoad = () => {
-    getQuestions().then(quest => quest.results.forEach(element => printQuestions(element)))
+    getQuestions().then(quest => quest.results.forEach(element => printQuestions(element))).then(()=>printQuestion(questions))
 }
 
 
