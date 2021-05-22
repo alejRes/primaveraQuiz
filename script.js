@@ -109,12 +109,12 @@ const printQuestions = (quests) => {
  */
 
 const questionOnLoad = () => {
-    getQuestions().then(quest => quest.results.forEach(element => printQuestions(element))).then(()=>printQuestion(questions))
+    getQuestions().then(quest => quest.results.forEach(element => printQuestions(element))).then(()=>printQuestion(questions,0))
 }
 
-document.getElementById("takeQuiz").addEventListener("click",()=> {
+/* document.getElementById("takeQuiz").addEventListener("click",()=> {
     location.assign("question.html") 
-})
+}) */
 
 let score = 0;
 // function that messes up the awnser
@@ -211,7 +211,6 @@ const changeCheck = (i, container) => {
 
 if(location.pathname =="/question.html"){
     questionOnLoad()
-    printQuestion(questions, 0)
 }else if(location.pathname == "/results.html"){
     printresult();
 }
