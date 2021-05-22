@@ -136,7 +136,7 @@ const printQuestion = (questions, index) => {
 }
 // funtion that print the result in result.html
 const printresult = () =>{
-    let contenedor = document.querySelector('body')
+    let contenedor = document.querySelector('#puntuacion')
     let  points = JSON.parse(localStorage.getItem('score'))
     let labelPts = document.createElement("p")
     let txt = document.createTextNode(`${points}/10`)
@@ -175,7 +175,4 @@ if(location.pathname =="/question.html"){
 }else if(location.pathname == "/results.html"){
     printresult();
 }
-
-
-
 
