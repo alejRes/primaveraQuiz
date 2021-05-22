@@ -91,14 +91,10 @@ const unordenedList = (arrayOrdened) => {
 
 // function that paint targets
 const printQuestion = (questions, index) => {
-    console.log(questions[index].answers)
     let respuetas = unordenedList(questions[index].answers) //save a messy array
-
     let container = document.getElementById('divQuest');
     let quest = document.createElement("h2")
     quest.innerHTML=questions[index].label
-    // let txtquest = document.createTextNode(questions[index].label)
-    // quest.appendChild(txtquest)
     container.appendChild(quest)
     respuetas.forEach((element, i) => {
         let input = document.createElement("input")
@@ -123,32 +119,35 @@ const printQuestion = (questions, index) => {
 
     }
     btn.addEventListener('click', (event) => {
-        // let hoy, fecha;
+        
         if (btn.textContent != "Finalizar") {
             score = checkAnswer(score,questions[index].correct)
-            changeCheck(/* questions[index].correct, */ index, container)
+            changeCheck(index, container)
         } else {
             let hoy, fecha;
             hoy = new Date()
             fecha = `${hoy.getDate()}-${(hoy.getMonth() + 1)}-${hoy.getFullYear()} ${event.timeStamp}`
             score = checkAnswer(score,questions[index].correct)
-            // results(score, fecha)
-            // console.log(score)
-            location.assign(`results.html`)
-            
+            results(score, fecha)
+            location.assign(`results.html`)            
         }
     })
     container.appendChild(btn)
 }
 // funtion that print the result in result.html
 const printresult = () =>{
-    
+    let contenedor = document.querySelector('body')
+    let  points = JSON.parse(localStorage.getItem('score'))
+    let labelPts = document.createElement("p")
+    let txt = document.createTextNode(`${points}/10`)
+    labelPts.appendChild(txt)
+    contenedor.appendChild(labelPts)    
 }
 
 // function that save the score 
 const checkAnswer = (score, aswTrue) =>{
     document.getElementsByName('answer').forEach(element => {
-        console.log(element.checked)
+        
         if (element.checked) {
             if(element.value == aswTrue){
                 score++
@@ -169,10 +168,9 @@ const changeCheck = (i, container) => {
         printQuestion(questions, i)
     }
 }
-console.log(location)
 
 if(location.pathname =="/question.html"){
-    // questionOnLoad()
+    questionOnLoad()
     printQuestion(questions, 0)
 }else if(location.pathname == "/results.html"){
     printresult();
