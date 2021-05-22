@@ -1,5 +1,14 @@
-
+input{
+    display: none;
+}
+label:checked{
+    border: 1px solid black;
+}
+/* input:checked{
+    border: 1px solid black;
+} */
 div{
+    font-size: x-large;
     display: flex;
     flex-direction: column;
 }
