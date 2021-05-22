@@ -102,8 +102,6 @@ const printQuestions = (quests) => {
     questions.push(question);
 }
 
-
-
 /**
  * 
  * Dummy printQuestion
@@ -127,3 +125,6 @@ const questionOnLoad = () => {
     getQuestions().then(quest => quest.results.forEach(element => printQuestions(element))).then(()=>printQuestion(questions))
 }
 
+document.getElementById("takeQuiz").addEventListener("click",()=> {
+    location.assign("question.html") 
+})
