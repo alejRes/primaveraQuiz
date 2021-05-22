@@ -1,8 +1,3 @@
-
-
-
-
-
 let keys
 let values
 let horaPuntuacion ={}
@@ -124,3 +119,4 @@ function pintarUl(a,b) {for (let i = 0; i < b.length; i++) {
     
 }
 pintarUl(graficDates,graficValues)
+
