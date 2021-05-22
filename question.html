@@ -4,10 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
-<body onload="questionOnLoad()">
-
+<body>
+    <h1>Quiz</h1>
+    <div id="divQuest">
+        <h2>Quien es el maximo goleador de la Juventus?</h2>
+        <label for="answer">David Trezeguet</label>
+        <input type="radio" name="answer" id="answer" class="ans">
+        <label for="answer">Pavel Nedved</label>
+        <input type="radio" name="answer" id="answer">
+        <label for="answer">Michel Platini</label>
+        <input type="radio" name="answer" id="answer">
+        <label for="answer">Alessandro Del Piero</label>
+        <input type="radio" name="answer" id="answer">
+        <button id="btnNext">Siguiente</button>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

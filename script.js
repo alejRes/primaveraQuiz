@@ -127,10 +127,3 @@ const questionOnLoad = () => {
     getQuestions().then(quest => quest.results.forEach(element => printQuestions(element))).then(()=>printQuestion(questions))
 }
 
-
-
-
-
-
-
-
