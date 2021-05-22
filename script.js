@@ -1,80 +1,120 @@
-let questions = [{
-    name: 'Matemáticas',
-    label: 'Cual es el resultado de multiplicar 4 x 5',
-    answers: [
-        { label: '20', value: '20' },
-        { label: '15', value: '15' },
-        { label: '12', value: '12' },
-        { label: '16', value: '16' },
-    ],
-    correct: '20'
-},
-{
-    name: 'Dibujos',
-    label: '¿Qué animal es piolin?',
-    answers: [
-        { label: 'Un canario', value: 'Un canario' },
-        { label: 'Un gato', value: 'Un gato' },
-        { label: 'Un perro', value: 'Un perro' },
-        { label: 'Un elefante', value: 'Un elefante' },
-    ],
-    correct: 'Un canario'
-},
-{
-    name: 'Literatura',
-    label: "Who sings the rap song &quot;Secret Wars Part 1&quot;?",
-    answers: [
-        { label: 'Un canario', value: 'Un canario' },
-        { label: 'Un gato', value: 'Un gato' },
-        { label: 'Un perro', value: 'Un perro' },
-        { label: 'Un elefante', value: 'Un elefante' },
-    ],
-    correct: 'Un canario'
-},
-{
-    name: 'Dibujos',
-    label: '¿Qué animal es piolin?',
-    answers: [
-        { label: 'Un canario', value: 'Un canario' },
-        { label: 'Un gato', value: 'Un gato' },
-        { label: 'Un perro', value: 'Un perro' },
-        { label: 'Un elefante', value: 'Un elefante' },
-    ],
-    correct: 'Un canario'
-},
-{
-    name: 'Dibujos',
-    label: '¿Qué animal es piolin?',
-    answers: [
-        { label: 'Un canario', value: 'Un canario' },
-        { label: 'Un gato', value: 'Un gato' },
-        { label: 'Un perro', value: 'Un perro' },
-        { label: 'Un elefante', value: 'Un elefante' },
-    ],
-    correct: 'Un canario'
-},
-{
-    name: 'Dibujos',
-    label: '¿Qué animal es piolin?',
-    answers: [
-        { label: 'Un canario', value: 'Un canario' },
-        { label: 'Un gato', value: 'Un gato' },
-        { label: 'Un perro', value: 'Un perro' },
-        { label: 'Un elefante', value: 'Un elefante' },
-    ],
-    correct: 'Un canario'
-},
-{
-    name: 'Dibujos',
-    label: '¿Con que nombre se conozo al sonido que hacen las gallinas?',
-    answers: [
-        { label: 'Cacarear', value: 'Cacarear' },
-        { label: 'Rebuznar', value: 'Rebuzanar' },
-        { label: 'Ladrar', value: 'Ladrar' },
-        { label: 'Ulular', value: 'Ulular' },
-    ],
-    correct: 'Cacarear'
-}]
+/**
+ * 
+ * Questions manually loaded
+ * 
+ */
+
+const questions = [];
+
+const quest = {
+    "results":[
+                {
+                    "category":"History","type":"multiple",
+                    "difficulty":"hard",
+                    "question":"How long did the Warsaw Uprising during World War II last?",
+                    "correct_answer":"63 Days",
+                    "incorrect_answers":[
+                        "20 Days",
+                        "55 Days",
+                        "224 Days"
+                    ]
+                },{
+                    "category": "Entertainment: Music",
+                    "type": "multiple",
+                    "difficulty": "hard",
+                    "question": "Who sings the rap song &quot;Secret Wars Part 1&quot;?",
+                    "correct_answer": "The Last Emperor",
+                    "incorrect_answers": [
+                        "MC Frontalot",
+                        "Busdriver",
+                        "Masta Killa"
+                    ]
+                },{
+                    "category": "Geography",
+                    "type": "multiple",
+                    "difficulty": "hard",
+                    "question": "What is the official German name of the Swiss Federal Railways?",
+                    "correct_answer": "Schweizerische Bundesbahnen",
+                    "incorrect_answers": [
+                        "Schweizerische Nationalbahnen",
+                        "Bundesbahnen der Schweiz",
+                        "Schweizerische Staatsbahnen"
+                    ]
+                },{
+                    "category": "Geography",
+                    "type": "multiple",
+                    "difficulty": "medium",
+                    "question": "The World Health Organization headquarters is located in which European country?",
+                    "correct_answer": "Switzerland",
+                    "incorrect_answers": [
+                        "United Kingdom",
+                        "France",
+                        "Belgium"
+                    ]
+                },{
+                    "category": "Entertainment: Video Games",
+                    "type": "multiple",
+                    "difficulty": "medium",
+                    "question": "Which of the following has Jennifer Taylor NOT voiced?",
+                    "correct_answer": "Sarah Kerrigan",
+                    "incorrect_answers": [
+                        "Princess Peach",
+                        "Zoey",
+                        "Cortana"
+                    ]
+                }
+            ]
+}
+
+/**
+ * 
+ * Question Fetch
+ * 
+ */
+
+const getQuestions = async () => {
+    
+    const res = await fetch("https://opentdb.com/api.php?amount=5&type=multiple")
+    const data = await res.json()
+    data.results.forEach(element => quest.results.push(element));
+    return quest
+}
+
+/**
+ * 
+ * Fetch + printQuestions + printQuestion call
+ * 
+ */
+
+const printQuestions = (quests) => {
+    
+    question = {
+                name: quests.category,
+                label: quests.question,
+                answers: [
+                            {label: quests.incorrect_answers[0], value: quests.incorrect_answers[0]},
+                            {label: quests.incorrect_answers[1], value: quests.incorrect_answers[1]},
+                            {label: quests.incorrect_answers[2], value: quests.incorrect_answers[2]},
+                            {label: quests.correct_answer, value: quests.correct_answer},
+                        ],
+                        correct: quests.correct_answer
+                    }
+    questions.push(question);
+}
+
+/**
+ * 
+ * Question on load function
+ * 
+ */
+
+const questionOnLoad = () => {
+    getQuestions().then(quest => quest.results.forEach(element => printQuestions(element))).then(()=>printQuestion(questions))
+}
+
+document.getElementById("takeQuiz").addEventListener("click",()=> {
+    location.assign("question.html") 
+})
 
 let score = 0;
 // function that messes up the awnser
