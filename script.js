@@ -172,3 +172,4 @@ function pintarUl(a,b) {for (let i = 0; i < b.length; i++) {
 
 //location.assign(`home.html`)
 
+
