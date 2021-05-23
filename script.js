@@ -168,7 +168,7 @@ const printQuestion = (questions, index) => {
             hoy = new Date()
             fecha = `${hoy.getDate()}-${(hoy.getMonth() + 1)}-${hoy.getFullYear()} ${event.timeStamp}`
             score = checkAnswer(score,questions[index].correct)
-            results(score, fecha)
+            result(score, fecha)
             location.assign(`results.html`)            
         }
     })
