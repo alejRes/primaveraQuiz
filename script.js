@@ -132,7 +132,12 @@ const unordenedList = (arrayOrdened) => {
 
 // function that paint targets
 const printQuestion = (questions, index) => {
+    
     let respuetas = unordenedList(questions[index].answers) //save a messy array
+    let section1 = document.createElement("section")
+    let section2 = document.createElement("section")
+    section1.setAttribute("class", "unodospreguntas")
+    section2.setAttribute("class","trescuatropreguntas")
     let container = document.getElementById('divQuest');
     let quest = document.createElement("h2")
     quest.innerHTML=questions[index].label
@@ -147,8 +152,13 @@ const printQuestion = (questions, index) => {
         let label = document.createElement('label')
         label.setAttribute('for', `answer${i + 1}`)
         label.innerHTML = element.label
-        container.appendChild(label)
-        container.appendChild(input)
+        if(i%2 == 0){
+            section1.appendChild(label)
+            section1.appendChild(input)
+        }else{
+            section2.appendChild(label)
+            section2.appendChild(input)
+        }  
     })
     let btn = document.createElement('button')
     btn.innerText = "Siguiente"
@@ -173,6 +183,8 @@ const printQuestion = (questions, index) => {
             location.assign(`results.html`)            
         }
     })
+    container.appendChild(section1)
+    container.appendChild(section2)
     container.appendChild(btn)
 }
 // funtion that print the result in result.html
