@@ -12,12 +12,12 @@ let result=(resultado, date)=>{horaPuntuacion[date]=resultado
 }
      //console.log(horaPuntuacion)
  
-    result("9","14-8-2021 158")
-    result("7","53-8-2021 261")
-    result("1","73-8-2021 391")
-    result("4","73-8-2021 369")
-    result("4","73-8-2021 3924")
-    result("4","73-8-2021 3914")
+    // result("9","14-8-2021 158")
+    // result("7","53-8-2021 261")
+    // result("1","73-8-2021 391")
+    // result("4","73-8-2021 369")
+    // result("4","73-8-2021 3924")
+    // result("4","73-8-2021 3914")
 //console.log(keys)
 let fechas=keys.map((x)=>x.slice(0,9))
     console.log(fechas)
@@ -66,16 +66,35 @@ console.log(graficValues)
                 type: 'bar',
                 data: data,
                 options: {
+                    scale: {
+                        ticks: {
+                          precision: 0
+                        }
+                      },
                 scales: {
+                    
                     y: {
                     beginAtZero: true,
-                    endAt:10
+                    endAt:10,
+                    display: true,
+                        title: {
+                          display: true,
+                          text: 'puntuaciones',
+                          color: '#191',
+                          font: {
+                            family: 'Times',
+                            size: 20,
+                            // style: 'normal',
+                            lineHeight: 1.2
+                          },
+                         // padding: {top: 30, left: 0, right: 0, bottom: 0}
+                        }
                     },
                     x:{
                         display: true,
                         title: {
                           display: true,
-                          text: 'ultimas partidas ',
+                          text: 'fechas',
                           color: '#191',
                           font: {
                             family: 'Times',
@@ -115,8 +134,8 @@ function pintarUl(a,b) {for (let i = 0; i < b.length; i++) {
     document.getElementById("ul").appendChild(li)
     li.appendChild(texto)
 }
-    document.createTextNode(``)
+    
     
 }
 pintarUl(graficDates,graficValues)
-
+//location.assign(`home.html`) 
