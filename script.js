@@ -31,7 +31,6 @@ let result=(resultado, date)=>{
             pintarUl(graficDates,graficValues)
         }
         }
-
 // let result=(resultado, date)=>{horaPuntuacion[date]=resultado
 //     localStorage.setItem(
 //      "quentinTarantino", JSON.stringify(horaPuntuacion));
@@ -42,19 +41,12 @@ let result=(resultado, date)=>{
 //            // console.log(values)
 // }
      //console.log(horaPuntuacion)
- 
-     
     // result("10","53-8-2021 3856")
     // result("4","73-8-2021 3914")
 //console.log(keys)
 function filtrar() {
-    
  fechas=keys.map((x)=>x.slice(0,9))
     console.log(fechas)
-
-   
-
-
      graficDates=[]
         let numero = fechas
         let hola2 = numero.length-4//(numero.length-(numero.length-4))
@@ -62,7 +54,6 @@ function filtrar() {
             graficDates.push(numero[i])
         }
 console.log(graficDates)
-
  graficValues=[]
         let numero2 = values
         let hola3 = numero2.length-4//(numero.length-(numero.length-4))
@@ -71,7 +62,6 @@ console.log(graficDates)
         }
     }
 console.log(graficValues)
-
  storagepaintGraphics =() => {
     fechas = graficDates
     puntos = graficValues
@@ -83,13 +73,9 @@ console.log(graficValues)
                     data: puntos,
                     backgroundColor: [
                     'rgba(0, 241, 255, 0.2)'
-                    
-                    
-                    
                     ],
                     borderColor: [
                     'RGB(0, 168, 0)'
-                    
                     ],
                     borderWidth: 3
                 }]
@@ -104,7 +90,6 @@ console.log(graficValues)
                         }
                       },
                 scales: {
-                    
                     y: {
                     beginAtZero: true,
                     endAt:10,
@@ -140,36 +125,19 @@ console.log(graficValues)
                 }
                 },
             };
-
-
-
-
             var myChart = new Chart(
                 document.getElementById('myChart'),
                 config
             );
-
             function pintarResultados(){
     console.log (puntos.map((x)=>`tu puntuacion es:${x}`))
-
-
-
-
             }pintarResultados(puntos)
  } 
- 
- 
-
 function pintarUl(a,b) {for (let i = 0; i < b.length; i++) {
     let texto = document.createTextNode(`${a[i]} : ${b[i]} aciertos`)
     let li = document.createElement("li")
     document.getElementById("ul").appendChild(li)
     li.appendChild(texto)
 }
-    
-    
 }
-
 //location.assign(`home.html`)
-
-
