@@ -1,3 +1,117 @@
+class Puntua {
+    constructor(fecha, puntuacion) {
+        this.fecha = fecha;
+        this.puntuacion = puntuacion;
+    }
+}
+
+let arrayPuntuacion = localStorage.getItem("userScore") ? JSON.parse(localStorage.getItem("userScore")) : []
+
+let puntos = [];
+let fechas = [];
+
+const result = (resultado, date) => {
+    const newPuntua = new Puntua(date, resultado)
+    arrayPuntuacion.push(newPuntua)
+    const userPoints = JSON.stringify(arrayPuntuacion)
+    localStorage.setItem("userScore", userPoints)
+}
+
+const getPuntuacion = () => {
+    arrayPuntuacion.forEach(element => {
+        puntos.push(element.puntuacion)
+    });
+}
+
+const getFecha = () => {
+    arrayPuntuacion.forEach(element => {
+        fechas.push(element.fecha)
+    });
+}
+
+function pintarUl(array) {
+
+    let fijoA4 = array.length
+
+    if (fijoA4 > 4) {
+        for (let i = fijoA4 - 4; i < array.length; i++) {
+
+        let li = document.createElement("li")
+        let texto = document.createTextNode(`${array[i].fecha} : ${array[i].puntuacion} aciertos`)
+        li.appendChild(texto)
+        document.getElementById("ul").appendChild(li)
+    }
+}  else if (fijoA4 <= 4) {
+
+    for (let i = 0; i < array.length; i++) {
+
+        let li = document.createElement("li")
+        let texto = document.createTextNode(`${array[i].fecha} : ${array[i].puntuacion} aciertos`)
+        li.appendChild(texto)
+        document.getElementById("ul").appendChild(li)
+    }
+}
+}
+
+const printGrafica = (fechas, puntos) =>{
+    pintarUl(arrayPuntuacion)
+    const labels = fechas;
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Ultimas puntuaciones:',
+            data: puntos,
+            backgroundColor: ['rgba(0, 241, 255, 0.2)'],
+            borderColor: ['RGB(0, 168, 0)'],
+            borderWidth: 3
+        }]
+    };
+
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            scale: {
+                ticks: {
+                    precision: 0
+                }
+                },
+                scales: {
+                    y: {
+            beginAtZero: true,
+            endAt:10,
+            display: true,
+            title: {
+                display: true,
+                text: 'puntuaciones',
+                color: '#191',
+                font: {
+                    family: 'Times',
+                    size: 20,
+                    lineHeight: 1.2
+                },
+                }
+            },
+            x:{
+                display: true,
+                title: {
+                    display: true,
+                    text: 'fechas',
+                    color: '#191',
+                    font: {
+                    family: 'Times',
+                    size: 20,
+                    lineHeight: 1.2
+                },
+            }
+        }
+    }
+    },
+    };
+
+    var myChart = new Chart(document.getElementById('myChart'),config);
+}
+
 
 /**
  * 
@@ -133,6 +247,10 @@ const unordenedList = (arrayOrdened) => {
 // function that paint targets
 const printQuestion = (questions, index) => {
     let respuetas = unordenedList(questions[index].answers) //save a messy array
+    let section1 = document.createElement("section")
+    let section2 = document.createElement("section")
+    section1.setAttribute("class", "unodospreguntas")
+    section2.setAttribute("class","trescuatropreguntas")
     let container = document.getElementById('divQuest');
     let quest = document.createElement("h2")
     quest.innerHTML=questions[index].label
@@ -147,8 +265,13 @@ const printQuestion = (questions, index) => {
         let label = document.createElement('label')
         label.setAttribute('for', `answer${i + 1}`)
         label.innerHTML = element.label
-        container.appendChild(label)
-        container.appendChild(input)
+        if(i%2 == 0){
+            section1.appendChild(label)
+            section1.appendChild(input)
+        }else{
+            section2.appendChild(label)
+            section2.appendChild(input)
+        } 
     })
     let btn = document.createElement('button')
     btn.innerText = "Siguiente"
@@ -167,12 +290,14 @@ const printQuestion = (questions, index) => {
         } else {
             let hoy, fecha;
             hoy = new Date()
-            fecha = `${hoy.getDate()}-${(hoy.getMonth() + 1)}-${hoy.getFullYear()} ${event.timeStamp}`
+            fecha = `${hoy.getDate()}-${(hoy.getMonth() + 1)}-${hoy.getFullYear()}`
             score = checkAnswer(score,questions[index].correct)
             result(score, fecha)
-            location.assign(`results.html`)            
+            location.assign(`results.html`)
         }
     })
+    container.appendChild(section1)
+    container.appendChild(section2)
     container.appendChild(btn)
 }
 // funtion that print the result in result.html
@@ -202,7 +327,7 @@ const checkAnswer = (score, aswTrue) =>{
 
 // function that change and check the targets
 const changeCheck = (i, container) => {
-   
+
     if (i != (questions.length - 1)) {
         i++
         container.innerHTML = ""
@@ -212,7 +337,13 @@ const changeCheck = (i, container) => {
 
 if(location.pathname =="/question.html"){
     questionOnLoad()
+    localStorage.setItem("score", score)
 }else if(location.pathname == "/results.html"){
     printresult();
+}else if(location.pathname == "/home.html"){
+    printGrafica(fechas, puntos);
+    getFecha();
+    getPuntuacion();
 }
+
 
