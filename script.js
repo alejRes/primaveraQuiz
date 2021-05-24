@@ -61,8 +61,8 @@ const printGrafica = (fechas, puntos) =>{
         datasets: [{
             label: 'Ultimas Puntuaciones:',
             data: puntos,
-            backgroundColor: ['rgba(0, 241, 255, 0.2)'],
-            borderColor: ['RGB(0, 168, 0)'],
+            backgroundColor: ['rgba(125, 125, 125, 0.2)'],
+            borderColor: ['black'],
             borderWidth: 3
         }]
     };
@@ -71,6 +71,9 @@ const printGrafica = (fechas, puntos) =>{
         type: 'bar',
         data: data,
         options: {
+            layout: {
+                padding: 30
+            },
             scale: {
                 ticks: {
                     precision: 0
@@ -84,7 +87,7 @@ const printGrafica = (fechas, puntos) =>{
             title: {
                 display: true,
                 text: 'Puntuaciones',
-                color: '#191',
+                color: 'black',
                 font: {
                     family: 'Poppins',
                     size: 20,
@@ -97,7 +100,7 @@ const printGrafica = (fechas, puntos) =>{
                 title: {
                     display: true,
                     text: 'Fechas',
-                    color: '#191',
+                    color: '#black',
                     font: {
                     family: 'Poppins',
                     size: 20,
