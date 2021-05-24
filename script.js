@@ -1,33 +1,55 @@
-class Puntua {
-    constructor(fecha, puntuacion) {
-        this.fecha = fecha;
-        this.puntuacion = puntuacion;
+import { firebaseConfig } from './config.js'
+
+firebase.initializeApp(firebaseConfig);
+
+let db = firebase.firestore(); // Objeto que representa la BBDD
+
+let puntua = (fecha, puntuacion) => {
+    let score ={
+        fecha: fecha,
+        puntuacion: puntuacion
     }
+    return score
 }
 
-let arrayPuntuacion = localStorage.getItem("userScore") ? JSON.parse(localStorage.getItem("userScore")) : []
+// let arrayPuntuacion = localStorage.getItem("userScore") ? JSON.parse(localStorage.getItem("userScore")) : []
 
 let puntos = [];
 let fechas = [];
+// function result para guardo resultados en el localStorage
+// const result = (resultado, date) => {
+//     const newPuntua = new Puntua(date, resultado) 
+//     arrayPuntuacion.push(newPuntua)
+//     const userPoints = JSON.stringify(arrayPuntuacion)
+//     localStorage.setItem("userScore", userPoints)
+// }
 
+// function result para guardar en firebase
 const result = (resultado, date) => {
-    const newPuntua = new Puntua(date, resultado)
-    arrayPuntuacion.push(newPuntua)
-    const userPoints = JSON.stringify(arrayPuntuacion)
-    localStorage.setItem("userScore", userPoints)
-}
-
-const getPuntuacion = () => {
-    arrayPuntuacion.forEach(element => {
-        puntos.push(element.puntuacion)
+    let miResultado = puntua(date, resultado)
+    db.collection("score").add(miResultado)
+    .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+        location.assign(`results.html`)
+    })
+    .catch((error) => {
+        console.error("Error adding document: ", error);
     });
 }
 
-const getFecha = () => {
-    arrayPuntuacion.forEach(element => {
-        fechas.push(element.fecha)
-    });
-}
+
+
+// const getPuntuacion = () => {
+//     arrayPuntuacion.forEach(element => {
+//         puntos.push(element.puntuacion)
+//     });
+// }
+
+// const getFecha = () => {
+//     arrayPuntuacion.forEach(element => {
+//         fechas.push(element.fecha)
+//     });
+// }
 
 function pintarUl(array) {
 
@@ -206,7 +228,7 @@ const getQuestions = async () => {
 
 const printQuestions = (quests) => {
     
-    question = {
+    let question = {
                 name: quests.category,
                 label: quests.question,
                 answers: [
@@ -293,10 +315,11 @@ const printQuestion = (questions, index) => {
         } else {
             let hoy, fecha;
             hoy = new Date()
-            fecha = `${hoy.getDate()}-${(hoy.getMonth() + 1)}-${hoy.getFullYear()}`
+            fecha = `${hoy.getDate()}-${(hoy.getMonth() + 1)}-${hoy.getFullYear()} ${hoy.getHours()}:${hoy.getMinutes()}:${hoy.getSeconds()}`
             score = checkAnswer(score,questions[index].correct)
+            console.log(fecha)
             result(score, fecha)
-            location.assign(`results.html`)
+            
         }
     })
     container.appendChild(section1)
@@ -344,9 +367,9 @@ if(location.pathname =="/question.html"){
 }else if(location.pathname == "/results.html"){
     printresult();
 }else if(location.pathname == "/home.html"){
-    printGrafica(fechas, puntos);
-    getFecha();
-    getPuntuacion();
+    // printGrafica(fechas, puntos);
+    // getFecha();
+    // getPuntuacion();
 }
 
 
