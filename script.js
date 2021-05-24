@@ -59,7 +59,7 @@ const printGrafica = (fechas, puntos) =>{
     const data = {
         labels: labels,
         datasets: [{
-            label: 'Ultimas puntuaciones:',
+            label: 'Ultimas Puntuaciones:',
             data: puntos,
             backgroundColor: ['rgba(0, 241, 255, 0.2)'],
             borderColor: ['RGB(0, 168, 0)'],
@@ -83,10 +83,10 @@ const printGrafica = (fechas, puntos) =>{
             display: true,
             title: {
                 display: true,
-                text: 'puntuaciones',
+                text: 'Puntuaciones',
                 color: '#191',
                 font: {
-                    family: 'Times',
+                    family: 'Poppins',
                     size: 20,
                     lineHeight: 1.2
                 },
@@ -96,10 +96,10 @@ const printGrafica = (fechas, puntos) =>{
                 display: true,
                 title: {
                     display: true,
-                    text: 'fechas',
+                    text: 'Fechas',
                     color: '#191',
                     font: {
-                    family: 'Times',
+                    family: 'Poppins',
                     size: 20,
                     lineHeight: 1.2
                 },

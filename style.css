@@ -3,14 +3,18 @@ body {
     background: -webkit-linear-gradient(to bottom, #021B79, #0575E6);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to bottom, #021B79, #0575E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */     
     font-family: 'Poppins', sans-serif;
-    height: 900px;
+    height: 1000px;
     margin: 0%;
 }
-h1 {
+html {
+    height: auto;
+}
+h1 {    
     display: flex;
+    margin: 0%;
     justify-content: center;
     color: whitesmoke;
-    font-size: 50px;
+    font-size: 80px;
 }
 h2 {
     text-align: center;
@@ -18,16 +22,18 @@ h2 {
     margin: 10px;
     padding: 10px;
 }
+p {
+    font-size: 20px;
+}
 input {
     display: none;
 }
 label {
+    font-size: 20px;
     display: flex;
-    justify-content: center;
-    /* display: flex; */
-    /* text-align: center; */
+    flex-direction: column;
+    align-content: space-around;
     flex-wrap: wrap;
-    width: 80%;
     margin: 10px;
     padding: 10px;
     border-radius: 10px;
@@ -35,10 +41,10 @@ label {
 div {
     background-color: whitesmoke;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     flex-direction: column;
     align-items: center;
-    margin: 40px;
+    margin: 50px;
     border-radius: 10px;
     box-shadow: 4px 4px 20px black;
 }
@@ -47,6 +53,7 @@ button {
     font-size: 17px;
     margin: 30px;
     padding: 15px;
+    border: solid;
     border-radius: 10px;
 }
 button:hover {
@@ -55,18 +62,52 @@ button:hover {
 label:hover {
     background-color: #a5a5a5;
 }
+.responsive {
+    width: 70%;
+    height: auto;
+}
+#welcome img {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+#grafico#myChart {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 40px;
+}
+#puntuacion {
+    font-size: 20px;
+    background: #0575E6;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #021B79, #0575E6);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #021B79, #0575E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+    width: 200px;
+    height: 180px;
+    border-radius: 100px;
+}
+#puntuacion p {
+    color: whitesmoke;
+    font-size: 50px;
+}
 @media screen and (min-width: 600px) {
     .container {
         display: flex;
     }
     #welcome {
         width: 50%;
+        margin-right: 0%;
     }
     #grafico {
         width: 50%;
     }
+    #myChart {
+        margin-top: 40px;
+        width: 100%;
+        height: auto;
+    }
     #takeQuiz {
-        margin-top: 130px;
+        margin-top: 80px;
     }
     .unodospreguntas {
         display: flex;
