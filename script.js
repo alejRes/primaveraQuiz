@@ -11,7 +11,6 @@ let puntua = (fecha, puntuacion) => {
     }
     return score
 }
-
 // let arrayPuntuacion = localStorage.getItem("userScore") ? JSON.parse(localStorage.getItem("userScore")) : []
 
 let puntos = [];
@@ -37,6 +36,29 @@ const result = (resultado, date) => {
     });
 }
 
+let readResults = () => {
+    let array=[]
+    db.collection("score").get().then((querySnapshot) => {
+        /* querySnapshot.sort(function(a, b) {
+            return a.fecha - b.fecha;
+          }); */
+        
+        querySnapshot.forEach(doc => {
+            array.push(doc.data())
+            console.log(array)
+            array.sort(function(a, b) {
+                return b.fecha - a.fecha;
+            });
+            console.log(array)
+            /* console.log(doc.data().fecha);
+            fechas.push(doc.data().fecha)
+            puntos.push(doc.data().puntuacion) */
+        
+        })
+    })
+    console.log(fechas)
+    console.log(puntos)
+}
 
 
 // const getPuntuacion = () => {
@@ -217,6 +239,7 @@ const getQuestions = async () => {
     const res = await fetch("https://opentdb.com/api.php?amount=5&type=multiple")
     const data = await res.json()
     data.results.forEach(element => quest.results.push(element));
+    [quest.results[0], quest.results[1], quest.results[2], quest.results[3], quest.results[4], quest.results[5], quest.results[6], quest.results[7], quest.results[8], quest.results[9]] = [quest.results[9], quest.results[1], quest.results[7], quest.results[3], quest.results[5], quest.results[4], quest.results[6], quest.results[2], quest.results[8], quest.results[0]];
     return quest
 }
 
@@ -240,6 +263,7 @@ const printQuestions = (quests) => {
                         correct: quests.correct_answer
                     }
     questions.push(question);
+    
 }
 
 /**
@@ -259,8 +283,10 @@ const questionOnLoad = () => {
 let score = 0;
 // function that messes up the awnser
 const unordenedList = (arrayOrdened) => {
+    
     let arrayUnordened = [];
     let itera = arrayOrdened.length
+    
     for (let i = 0; i < itera; i++) {
         let num = Math.floor(Math.random() * arrayOrdened.length)
         arrayUnordened.push(arrayOrdened[num])
@@ -367,9 +393,9 @@ if(location.pathname =="/question.html"){
 }else if(location.pathname == "/results.html"){
     printresult();
 }else if(location.pathname == "/home.html"){
+    readResults();
     // printGrafica(fechas, puntos);
     // getFecha();
     // getPuntuacion();
+    
 }
-
-
